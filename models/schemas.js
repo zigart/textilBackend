@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+let attandant = mongoose.Schema({
+    name: String,
+    password: String
+})
+
+
 let worker = mongoose.Schema({
     name: String,
     activeDivider: Boolean,
@@ -20,5 +26,6 @@ let review = mongoose.Schema({
     failed: Number
 });
 
+module.exports = mongoose.model('worker', workerSchema);
 module.exports = mongoose.model('divide', divideSchema);
 module.exports = mongoose.model('review', reviewSchema);
