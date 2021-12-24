@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-let attandant = mongoose.Schema({
+let attandantSchema = mongoose.Schema({
     name: String,
     password: String
 })
 
 
-let worker = mongoose.Schema({
+let workerSchema = mongoose.Schema({
     name: String,
     activeDivider: Boolean,
     activeReviewer: Boolean,
@@ -14,18 +14,19 @@ let worker = mongoose.Schema({
     lastReview: Date
 });
 
-let divide = mongoose.Schema({
+let divideSchema = mongoose.Schema({
     worker:String,
     date: Date
 });
 
-let review = mongoose.Schema({
+let reviewSchema = mongoose.Schema({
     worker: String,
     date: Date,
     colth: Number,
     failed: Number
 });
 
+module.exports = mongoose.model('attandant', attandantSchema);
 module.exports = mongoose.model('worker', workerSchema);
 module.exports = mongoose.model('divide', divideSchema);
 module.exports = mongoose.model('review', reviewSchema);

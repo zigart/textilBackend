@@ -1,5 +1,5 @@
 let express = require('express');
-// let routes = require('./routes/routes');
+let routes = require('./routes/routes');
 let app = express();
 
 
@@ -16,6 +16,6 @@ app.use((req, res, next) => {
 });
 
 //rutas
-// app.use('', routes);
+ app.use('', routes);
 
 module.exports = app;
