@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 let workerSchema = mongoose.Schema({
     name: String,
-    activeDivider: Boolean,
-    activeReviewer: Boolean,
-    lastDivition: Date,
-    lastReview: Date
+    activeDivider: String,
+    activeReviewer: String,
+    lastDivition: String,
+    lastReview: String
 });
 
 const worker = mongoose.model('worker', workerSchema);
