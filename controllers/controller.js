@@ -38,19 +38,22 @@ let controller = {
         worker.lastDivition = params.lastDivition;
         worker.lastReview = params.lastReview;
         
-        worker.save();
-        res.status(200).send({
-            worker
+        worker.save((err, workerStored)=>{
+            if (err) return res.status(500).send({ message: "error al guardar" });
+            if (!workerStored)
+              return res
+                .status(404)
+                .send({ message: "no se pudo crear el contador" });
+            return res.status(200).send({ worker: workerStored });
         });
     },
-    getWorker:function (req,res){
-        
+
+    getWorker:function (req,res){    
         workerSchema.find({}).exec((err, worker)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
             if (!worker) return res.status(404).send({ message: "no existe el proyecto" });
             return res.status(200).send({worker});
         });
-
     },
 
 

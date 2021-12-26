@@ -9,7 +9,7 @@ router.get('/revision', controller.getLastReview);
 
 //post
 router.post('/configuracion', controller.definedAttandant);
-router.post('/nuevo-trabajador', controller.addWorker);
+router.post('/trabajadores', controller.addWorker);
 router.post('/revision', controller.addLastReview);
 
 module.exports = router;
