@@ -44,7 +44,7 @@ let controller = {
               return res
                 .status(404)
                 .send({ message: "no se pudo crear el contador" });
-            return res.status(200).send({ worker: workerStored });
+            return res.status(200).send(workerStored);
         });
     },
 
@@ -52,7 +52,7 @@ let controller = {
         workerSchema.find({}).exec((err, worker)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
             if (!worker) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send({worker});
+            return res.status(200).send(worker);
         });
     },
 
