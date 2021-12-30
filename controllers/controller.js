@@ -1,8 +1,9 @@
 const attandantSchema = require('../models/attandant');
 const workerSchema = require('../models/worker');
+const machineSchema = require('../models/machines');
 const reviewSchema = require('../models/review');
 const divideSchema = require('../models/divide');
-const review = require('../models/review');
+const worker = require('../models/worker');
 
 
 let controller = {
@@ -55,7 +56,38 @@ let controller = {
             return res.status(200).send(worker);
         });
     },
+    //machines
 
+
+    getMachines: function(req,res){
+        machineSchema.find({}).exec((err, machine)=> {
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!machine) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send(machine);
+        });
+    },
+
+    addMachine: function (req,res){
+        let machine = new machineSchema();
+        let params = req.body;
+
+        machine.machineNumber = params.machineNumber;
+        machine.avtiveMachine = true;
+
+
+        machine.save((err, machineStored)=>{
+            if (err) return res.status(500).send({ message: "error al guardar" });
+            if (!machineStored)
+              return res
+                .status(404)
+                .send({ message: "no se guardar la maquina" });
+            return res.status(200).send(machineStored);
+        });
+
+
+    },
+
+   
 
     //Review
 
