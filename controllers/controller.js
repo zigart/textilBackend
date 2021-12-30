@@ -72,7 +72,7 @@ let controller = {
         let params = req.body;
 
         machine.machineNumber = params.machineNumber;
-        machine.avtiveMachine = true;
+        machine.avtiveMachine = params.avtiveMachine;
 
 
         machine.save((err, machineStored)=>{
