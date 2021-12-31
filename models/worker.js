@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 let workerSchema = mongoose.Schema({
     name: String,
-    activeDivider: String,
-    activeReviewer: String,
+    activeDivider: Boolean,
+    activeReviewer: Boolean,
     lastDivition: String,
     lastReview: String
 });

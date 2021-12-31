@@ -5,6 +5,7 @@ let controller = require('../controllers/controller');
 //get
 router.get('/configuracion', controller.getAttandant);
 router.get('/trabajadores', controller.getWorker);
+router.get('/trabajador/:id', controller.getWorker)
 router.get('/maquinas', controller.getMachines);
 router.get('/revision', controller.getLastReview);
 
@@ -14,4 +15,7 @@ router.post('/trabajadores', controller.addWorker);
 router.post('/maquinas', controller.addMachine);
 router.post('/revision', controller.addLastReview);
 
+
+//put
+router.put('/trabajadores/:id')
 module.exports = router;

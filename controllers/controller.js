@@ -9,25 +9,46 @@ const worker = require('../models/worker');
 let controller = {
     
     //attendant
+    getAttandant: function(req,res){
+        attandantSchema.find({}).exec(
+            (err, attandant)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!attandant) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send({attandant});
+        });
+    },
+
     definedAttandant: function(req,res) {
       let attandant = new attandantSchema();
 
       attandant.name = "Encargado";
       attandant.password = "panichella";
+
       attandant.save();
       res.status(200).send({
           attandant
       });
     },
 
-    getAttandant: function(req,res){
-        attandantSchema.find({}).exec((err, attandant)=>{
+    //workers
+
+    getWorkers:function (req,res){    
+        workerSchema.find({}).exec(
+            (err, worker)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!attandant) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send({attandant});
+            if (!worker) return res.status(404).send({ message: "no existen trabajadoreso" });
+            return res.status(200).send(worker);
         });
     },
-    //workers
+
+    getWorker:function name(req, res) {
+        let workerID = req.params.id;
+        worker.findById(workerID).exec((err,worker)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!worker) return res.status(404).send({ message: "no existe el trabajador" });
+            return res.status(200).send(worker); 
+        });
+    },
 
     addWorker:function (req,res){
         let worker = new workerSchema();
@@ -39,35 +60,38 @@ let controller = {
         worker.lastDivition = params.lastDivition;
         worker.lastReview = params.lastReview;
         
-        worker.save((err, workerStored)=>{
+        worker.save(
+            (err, workerStored)=>{
             if (err) return res.status(500).send({ message: "error al guardar" });
-            if (!workerStored)
-              return res
-                .status(404)
-                .send({ message: "no se pudo crear el contador" });
+            if (!workerStored) return res.status(404).send({ message: "no se pudo guradar el trabajador" });
             return res.status(200).send(workerStored);
         });
     },
 
-    getWorker:function (req,res){    
-        workerSchema.find({}).exec((err, worker)=>{
-            if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!worker) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send(worker);
-        });
+    modifyWorker: function (req,res) {
+        let workerId = req.params.id;
+        let update = req.body;
+
+        worker.findByIdAndUpdate(workerId, update, 
+            (err, workerUpdated)=>{
+            if(err) return res.status(500).send({message: 'error al actualizar'});
+            if (!workerUpdated) return res.status(404).send({message:'no existe el trabajador a actualizar'});
+            return res.status(200).send(workerUpdated);
+        })
     },
+
     //machines
 
 
-    getMachines: function(req,res){
+    getMachines: function(req, res){
         machineSchema.find({}).exec((err, machine)=> {
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!machine) return res.status(404).send({ message: "no existe el proyecto" });
+            if (!machine) return res.status(404).send({ message: "no se encontraron maquinas" });
             return res.status(200).send(machine);
         });
     },
 
-    addMachine: function (req,res){
+    addMachine: function (req, res){
         let machine = new machineSchema();
         let params = req.body;
 
@@ -76,20 +100,25 @@ let controller = {
 
 
         machine.save((err, machineStored)=>{
-            if (err) return res.status(500).send({ message: "error al guardar" });
-            if (!machineStored)
-              return res
-                .status(404)
-                .send({ message: "no se guardar la maquina" });
+            if (err) return res.status(500).send({ message: "error al agregar la maquina" });
+            if (!machineStored)return res.status(404).send({ message: "no se guardar la maquina" });
             return res.status(200).send(machineStored);
         });
 
 
     },
-
-   
-
+    
+    
+    
     //Review
+
+    getLastReview: function(req,res){
+        reviewSchema.find({}).exec((err,review)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!review) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send({review});
+        });
+    },
 
     addLastReview:function(req,res) {
         let review = new reviewSchema();
@@ -107,13 +136,6 @@ let controller = {
         });
     },
 
-    getLastReview: function(req,res){
-        reviewSchema.find({}).exec((err,review)=>{
-            if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!review) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send({review});
-        })
-    }
 
 
 }
