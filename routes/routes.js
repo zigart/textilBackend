@@ -4,7 +4,7 @@ let controller = require('../controllers/controller');
 
 //get
 router.get('/configuracion', controller.getAttandant);
-router.get('/trabajadores', controller.getWorker);
+router.get('/trabajadores', controller.getWorkers);
 router.get('/trabajador/:id', controller.getWorker)
 router.get('/maquinas', controller.getMachines);
 router.get('/revision', controller.getLastReview);
