@@ -7,6 +7,7 @@ router.get('/configuracion', controller.getAttandant);
 router.get('/trabajadores', controller.getWorkers);
 router.get('/trabajador/:id', controller.getWorker)
 router.get('/maquinas', controller.getMachines);
+router.get('/maquina/:id', controller.getMachine);
 router.get('/revision', controller.getLastReview);
 
 //post

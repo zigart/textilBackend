@@ -4,6 +4,7 @@ const machineSchema = require('../models/machines');
 const reviewSchema = require('../models/review');
 const divideSchema = require('../models/divide');
 const worker = require('../models/worker');
+const machine = require('../models/machines');
 
 
 let controller = {
@@ -88,6 +89,15 @@ let controller = {
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
             if (!machine) return res.status(404).send({ message: "no se encontraron maquinas" });
             return res.status(200).send(machine);
+        });
+    },
+
+    getMachine:function name(req, res) {
+        let machineID = req.params.id;
+        machine.findById(machineID).exec((err,machineID)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!machineID) return res.status(404).send({ message: "no existe la maquina" });
+            return res.status(200).send(machineID); 
         });
     },
 
