@@ -5,6 +5,7 @@ const reviewSchema = require('../models/review');
 const divideSchema = require('../models/divide');
 const worker = require('../models/worker');
 const machine = require('../models/machines');
+const moment = require('moment');
 
 
 let controller = {
@@ -92,7 +93,7 @@ let controller = {
         });
     },
 
-    getMachine:function name(req, res) {
+    getMachine:function(req, res) {
         let machineID = req.params.id;
         machine.findById(machineID).exec((err,machineID)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
@@ -106,7 +107,9 @@ let controller = {
         let params = req.body;
 
         machine.machineNumber = params.machineNumber;
-        machine.avtiveMachine = params.avtiveMachine;
+        machine.activeMachine = params.activeMachine;
+        machine.lastReview =  params.lastReview;
+        machine.lastDivition = params.lastDivition;
 
 
         machine.save((err, machineStored)=>{
@@ -118,6 +121,16 @@ let controller = {
 
     },
     
+    updateActiveMachine: function(req, res) {
+        let machineID = req.params.id;
+        let update = req.body;
+
+    machine.findByIdAndUpdate(machineID, update, {new: true}, (err, machineID)=>{
+        if(err) return res.status(500).send({message: 'error al actualizar'});
+        if (!machineID) return res.status(404).send({message:'no existe la maquina a actualizar'});
+        return res.status(200).send(machineID);
+    });
+  },
     
     
     //Review

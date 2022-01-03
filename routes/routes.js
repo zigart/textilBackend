@@ -18,5 +18,6 @@ router.post('/revision', controller.addLastReview);
 
 
 //put
-router.put('/trabajadores/:id')
+router.put('/trabajadores/:id');
+router.put('/maquina/:id', controller.updateActiveMachine);
 module.exports = router;
