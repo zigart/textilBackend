@@ -14,8 +14,8 @@ let controller = {
         attandantSchema.find({}).exec(
             (err, attandant)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!attandant) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send({attandant});
+            if (!attandant) return res.status(404).send({ message: "no existe encargado" });
+            return res.status(200).send(attandant);
         });
     },
 
