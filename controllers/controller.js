@@ -70,7 +70,7 @@ let controller = {
         });
     },
 
-    modifyWorker: function (req,res) {
+    updateWorker: function (req,res) {
         let workerId = req.params.id;
         let update = req.body;
 
