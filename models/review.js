@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 let reviewSchema = mongoose.Schema({
-    worker: String,
+    worker: Object,
+    machine:Object,
     date: String,
     colth: Number,
     failed: Number

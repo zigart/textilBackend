@@ -146,21 +146,20 @@ let controller = {
     addLastReview:function(req,res) {
         let review = new reviewSchema();
         let params = req.body;
-
         review.worker = params.worker;
+        review.machine = params.machine;
         review.date = params.date;
         review.colth = params.colth;
         review.failed = params.failed;
-
-        review.save();
-
-        res.status(200).send({
-            review
+        
+        review.save((err, reviewStored)=>{
+            if (err) return res.status(500).send({ message: "error al guardar la revision" });
+            if (!reviewStored)return res.status(404).send({ message: "no se pudo guardar la revision" });
+            return res.status(200).send(reviewStored);
         });
+
+       
     },
-
-
-
 }
 
 module.exports = controller;
