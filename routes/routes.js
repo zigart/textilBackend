@@ -9,15 +9,22 @@ router.get('/trabajador/:id', controller.getWorker)
 router.get('/maquinas', controller.getMachines);
 router.get('/maquina/:id', controller.getMachine);
 router.get('/revision', controller.getLastReview);
+router.get('/trabajo-actual', controller.getCurrentWork);
+router.get('/trabajo-actual/:id', controller.getCurrentWork);
 
 //post
 router.post('/configuracion', controller.definedAttandant);
 router.post('/trabajadores', controller.addWorker);
 router.post('/maquinas', controller.addMachine);
 router.post('/revision', controller.addLastReview);
+router.post('/trabajo-actual', controller.saveCurrentWork);
 
 
 //put
 router.put('/trabajador/:id', controller.updateWorker);
 router.put('/maquina/:id', controller.updateActiveMachine);
+
+//delete
+
+router.delete('/trabajo-actual/:id', controller.deleteCurrentWork);
 module.exports = router;

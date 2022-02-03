@@ -5,7 +5,8 @@ const reviewSchema = require('../models/review');
 const divideSchema = require('../models/divide');
 const worker = require('../models/worker');
 const machine = require('../models/machines');
-const moment = require('moment');
+const currentWorkSchema = require('../models/current-work');
+const currentWork = require('../models/current-work');
 
 
 let controller = {
@@ -139,7 +140,7 @@ let controller = {
         reviewSchema.find({}).exec((err,review)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
             if (!review) return res.status(404).send({ message: "no existe el proyecto" });
-            return res.status(200).send({review});
+            return res.status(200).send(review);
         });
     },
 
@@ -160,6 +161,53 @@ let controller = {
 
        
     },
+
+    //current work
+
+    saveCurrentWork:function(req,res){
+        let currentWork =  new currentWorkSchema();
+        let params = req.body;
+        
+        currentWork._id = params._id;
+        currentWork.work = params.work;
+        currentWork.machine = params.machine;
+
+        currentWork.save((err, currentWorkStored)=>{
+            if(err) return res.status(500).send({message:"error al guardar el trabajo actual"});
+            if(!currentWorkStored) return res.status(404).send({message: "no se encontro un trabajo actual"});
+            return res.status(200).send(currentWorkStored);
+        });
+    },
+
+    getCurrentWorks:function(req,res){
+        currentWork.find({}).exec((err,currentWork)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!currentWork) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send(currentWork);
+        });
+    },
+
+    getCurrentWork:function(req, res) {
+        let workID =  req.params.id;
+
+        currentWork.findById(workID).exec((err,work)=>{
+            if (err) return res.status(500).send({ message: "error al devolver el trabajo" });
+            if (!work) return res.status(404).send();
+            return res.status(200).send(work); 
+        });
+    },
+
+    deleteCurrentWork: function (req, res) {
+        let workID = req.params.id;
+
+        currentWork.findByIdAndDelete(workID).exec((err, work)=>{
+            if (err) return res.status(500).send({ message: "error al devolver el trabajo" });
+            if (!work) return res.status(404).send({message : "no hay trabajo que borrar"});
+            return res.status(200).send(work); 
+        })
+    }
+
+
 }
 
 module.exports = controller;
