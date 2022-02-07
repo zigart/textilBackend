@@ -7,6 +7,7 @@ const worker = require('../models/worker');
 const machine = require('../models/machines');
 const currentWorkSchema = require('../models/current-work');
 const currentWork = require('../models/current-work');
+const toDoSchema = require('../models/todo');
 
 
 let controller = {
@@ -205,6 +206,23 @@ let controller = {
             if (!work) return res.status(404).send({message : "no hay trabajo que borrar"});
             return res.status(200).send(work); 
         })
+    },
+
+    //toDo - smallJobs
+
+    toDo: function(req,res){
+
+       let toDo = new toDoSchema();
+       let params = req.body;
+       toDo.toDo = params.toDo;
+       toDo.done = params.done;
+
+       
+       toDo.save((err, toDoStored)=>{
+        if (err) return res.status(500).send({ message: "error al agregar el trabajo" });
+        if (!toDoStored)return res.status(404).send({ message: "no existe el trabajo a agregar" });
+        return res.status(200).send(toDoStored);
+    });
     }
 
 

@@ -18,6 +18,7 @@ router.post('/trabajadores', controller.addWorker);
 router.post('/maquinas', controller.addMachine);
 router.post('/revision', controller.addLastReview);
 router.post('/trabajo-actual', controller.saveCurrentWork);
+router.post('/trabajos-secundarios', controller.toDo);
 
 
 //put
