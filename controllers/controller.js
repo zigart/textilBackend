@@ -245,6 +245,18 @@ let controller = {
             if (!toDoStored) return res.status(404).send(params);
             return res.status(200).send(toDoStored); 
         })
+    },
+
+    updateToDo:function(req,res){
+        let jobID = req.params.id;
+        let update = req.body;
+        console.log(jobID, update);
+        toDoSchema.findByIdAndUpdate(jobID, update, 
+            (err, jobUpdated)=>{
+            if(err) return res.status(500).send({message: 'error al actualizar'});
+            if (!jobUpdated) return res.status(404).send({message:'no existe el trabajador a actualizar'});
+            return res.status(200).send(jobUpdated);
+        })
     }
 
 
