@@ -29,4 +29,5 @@ router.put('/maquina/:id', controller.updateActiveMachine);
 //delete
 
 router.delete('/trabajo-actual/:id', controller.deleteCurrentWork);
+router.delete('/trabajos-secundarios/:id', controller.deleteToDo);
 module.exports = router;

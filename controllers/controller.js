@@ -233,6 +233,18 @@ let controller = {
         if (!toDoStored)return res.status(404).send({ message: "no existe el trabajo a agregar" });
         return res.status(200).send(toDoStored);
     });
+    },
+
+    deleteToDo: function(req,res){
+        
+    
+        let todo = req.params.id;
+        
+        toDoSchema.findByIdAndDelete(todo).exec((err, toDoStored)=>{
+            if (err) return res.status(500).send({ message: "error al devolver el trabajo" });
+            if (!toDoStored) return res.status(404).send(params);
+            return res.status(200).send(toDoStored); 
+        })
     }
 
 
