@@ -210,7 +210,17 @@ let controller = {
 
     //toDo - smallJobs
 
-    toDo: function(req,res){
+
+    getToDo:function(req, res){
+        toDoSchema.find({}).exec((err,toDoStored)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!toDoStored) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send(toDoStored);
+        });
+    },
+
+
+    savetoDo: function(req,res){
 
        let toDo = new toDoSchema();
        let params = req.body;

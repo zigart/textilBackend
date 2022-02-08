@@ -11,6 +11,7 @@ router.get('/maquina/:id', controller.getMachine);
 router.get('/revision', controller.getLastReview);
 router.get('/trabajo-actual', controller.getCurrentWork);
 router.get('/trabajo-actual/:id', controller.getCurrentWork);
+router.get('/trabajos-secundarios', controller.getToDo);
 
 //post
 router.post('/configuracion', controller.definedAttandant);
@@ -18,7 +19,7 @@ router.post('/trabajadores', controller.addWorker);
 router.post('/maquinas', controller.addMachine);
 router.post('/revision', controller.addLastReview);
 router.post('/trabajo-actual', controller.saveCurrentWork);
-router.post('/trabajos-secundarios', controller.toDo);
+router.post('/trabajos-secundarios', controller.savetoDo);
 
 
 //put
