@@ -32,4 +32,5 @@ router.put('/trabajos-secundarios/:id', controller.updateToDo);
 router.delete('/trabajador/:id', controller.deleteWorker);
 router.delete('/trabajo-actual/:id', controller.deleteCurrentWork);
 router.delete('/trabajos-secundarios/:id', controller.deleteToDo);
+router.delete('/maquina/:id', controller.deleteMachine);
 module.exports = router;

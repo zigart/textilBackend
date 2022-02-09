@@ -143,6 +143,16 @@ let controller = {
         return res.status(200).send(machineID);
     });
   },
+
+  deleteMachine: function(req, res){
+    let machineID = req.params.id;
+    machine.findByIdAndDelete(machineID).exec((err, machine)=>{
+        if(err) return res.status(500).send({message: "error al eliminar la maquina"});
+        if(!machine) return res.status(404).send({message: "no se encontro la maquina"});
+        return res.status(200).send(machine);
+    })
+    
+  },
     
     
     //Review
