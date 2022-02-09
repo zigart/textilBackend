@@ -84,6 +84,16 @@ let controller = {
         })
     },
 
+    deleteWorker: function(req,res){
+        let workerID = req.params.id;
+
+        worker.findByIdAndDelete(workerID).exec((err, workerDeleted)=>{
+            if(err) return res.status(500).send({message:'error al eliminar'});
+            if(!workerDeleted) return res.status(404).send({message: 'trabajador no encontrado'});
+            return res.status(200).send(workerDeleted);
+        })
+    },
+
     //machines
 
 
@@ -250,7 +260,6 @@ let controller = {
     updateToDo:function(req,res){
         let jobID = req.params.id;
         let update = req.body;
-        console.log(jobID, update);
         toDoSchema.findByIdAndUpdate(jobID, update, 
             (err, jobUpdated)=>{
             if(err) return res.status(500).send({message: 'error al actualizar'});

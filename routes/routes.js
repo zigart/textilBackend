@@ -29,6 +29,7 @@ router.put('/trabajos-secundarios/:id', controller.updateToDo);
 
 //delete
 
+router.delete('/trabajador/:id', controller.deleteWorker);
 router.delete('/trabajo-actual/:id', controller.deleteCurrentWork);
 router.delete('/trabajos-secundarios/:id', controller.deleteToDo);
 module.exports = router;
