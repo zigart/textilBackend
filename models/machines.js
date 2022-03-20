@@ -1,7 +1,7 @@
 const  mongoose  = require("mongoose")
 
 let machineSchema = mongoose.Schema({
-    machineNumber: Number,
+    machineName: String,
     activeMachine: Boolean,
     lastReview: String,
     lastDivition: String

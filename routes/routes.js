@@ -17,7 +17,8 @@ router.get('/trabajos-secundarios', controller.getToDo);
 router.post('/configuracion', controller.definedAttandant);
 router.post('/trabajadores', controller.addWorker);
 router.post('/maquinas', controller.addMachine);
-router.post('/revision', controller.addLastReview);
+router.post('/revisar', controller.addReview);
+router.post('/separar', controller.addLastDivition);
 router.post('/trabajo-actual', controller.saveCurrentWork);
 router.post('/trabajos-secundarios', controller.savetoDo);
 

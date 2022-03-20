@@ -118,7 +118,7 @@ let controller = {
         let machine = new machineSchema();
         let params = req.body;
 
-        machine.machineNumber = params.machineNumber;
+        machine.machineName = params.machineName;
         machine.activeMachine = params.activeMachine;
         machine.lastReview =  params.lastReview;
         machine.lastDivition = params.lastDivition;
@@ -165,22 +165,41 @@ let controller = {
         });
     },
 
-    addLastReview:function(req,res) {
+    addReview:function(req,res) {
         let review = new reviewSchema();
         let params = req.body;
         review.worker = params.worker;
         review.machine = params.machine;
+        review.status = params.status;
         review.date = params.date;
-        review.colth = params.colth;
-        review.failed = params.failed;
+        if(params.problems !== ''){
+            review.problems = params.problems;
+        }
         
         review.save((err, reviewStored)=>{
             if (err) return res.status(500).send({ message: "error al guardar la revision" });
             if (!reviewStored)return res.status(404).send({ message: "no se pudo guardar la revision" });
             return res.status(200).send(reviewStored);
         });
+    },
 
-       
+
+    //divide
+
+    addLastDivition:function(req,res) {
+        let divide = new divideSchema();
+        let params = req.body;
+        divide.worker = params.worker;
+        divide.machine = params.machine;
+        divide.date = params.date;
+        divide.colth = params.colth;
+        divide.failed = params.failed;
+        
+        divide.save((err, divideStored)=>{
+            if (err) return res.status(500).send({ message: "error al guardar la revision" });
+            if (!divideStored)return res.status(404).send({ message: "no se pudo guardar la revision" });
+            return res.status(200).send(divideStored);
+        });
     },
 
     //current work
