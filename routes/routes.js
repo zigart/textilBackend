@@ -24,6 +24,7 @@ router.post('/trabajos-secundarios', controller.savetoDo);
 
 
 //put
+router.put('/encargado', controller.uptadeAttandant);
 router.put('/trabajador/:id', controller.updateWorker);
 router.put('/maquina/:id', controller.updateActiveMachine);
 router.put('/trabajos-secundarios/:id', controller.updateToDo);

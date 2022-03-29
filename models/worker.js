@@ -5,7 +5,8 @@ let workerSchema = mongoose.Schema({
     activeDivider: Boolean,
     activeReviewer: Boolean,
     lastDivition: String,
-    lastReview: String
+    lastReview: String,
+    password: String
 });
 
 const worker = mongoose.model('worker', workerSchema);

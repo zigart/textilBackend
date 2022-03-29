@@ -26,12 +26,29 @@ let controller = {
       let attandant = new attandantSchema();
 
       attandant.name = "Encargado";
-      attandant.password = "panichella";
+      attandant.password = req.body.password;
 
-      attandant.save();
-      res.status(200).send({
-          attandant
-      });
+      attandant.save(
+        (err, attandantStored)=>{
+        if (err) return res.status(500).send({ message: "error al guardar" });
+        if (!attandantStored) return res.status(404).send({ message: "no se pudo guradar el encargado" });
+        return res.status(200).send(attandantStored);
+    });
+    },
+
+    uptadeAttandant: function(req,res){
+
+        let attandantId = req.params.id;
+        let update = req.body;
+
+        attandant.findByIdAndUpdate(attandantId, update, 
+            (err, attandantUpdated)=>{
+            if(err) return res.status(500).send({message: 'error al actualizar'});
+            if (!attandantUpdated) return res.status(404).send({message:'no existe el encargado a actualizar'});
+            return res.status(200).send(attandantUpdated);
+        })
+
+
     },
 
     //workers
@@ -63,6 +80,7 @@ let controller = {
         worker.activeReviewer = params.activeReviewer;
         worker.lastDivition = params.lastDivition;
         worker.lastReview = params.lastReview;
+        worker.password = params.password;
         
         worker.save(
             (err, workerStored)=>{
