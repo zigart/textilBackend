@@ -1,4 +1,4 @@
-const attandantSchema = require('../models/attandant');
+const attendantSchema = require('../models/attendant');
 const workerSchema = require('../models/worker');
 const machineSchema = require('../models/machines');
 const reviewSchema = require('../models/review');
@@ -8,44 +8,56 @@ const machine = require('../models/machines');
 const currentWorkSchema = require('../models/current-work');
 const currentWork = require('../models/current-work');
 const toDoSchema = require('../models/todo');
+const attandant = require('../models/attendant');
 
 
 let controller = {
     
     //attendant
-    getAttandant: function(req,res){
-        attandantSchema.find({}).exec(
-            (err, attandant)=>{
+
+    getAttendants: function(req,res){
+        attendantSchema.find({}).exec(
+            (err, attendant)=>{
             if (err) return res.status(500).send({ message: "error al devolver los datos" });
-            if (!attandant) return res.status(404).send({ message: "no existe encargado" });
-            return res.status(200).send(attandant);
+            if (!attendant) return res.status(404).send({ message: "no existe encargado" });
+            return res.status(200).send(attendant);
         });
     },
 
-    definedAttandant: function(req,res) {
-      let attandant = new attandantSchema();
 
-      attandant.name = "Encargado";
-      attandant.password = req.body.password;
+    getAttendant: function (req,res){
+        let attendantID = req.params.id;
+        attendantSchema.findById(attendantID).exec((err,attendant)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!attendant) return res.status(404).send({ message: "no existe el trabajador" });
+            return res.status(200).send(attendant); 
+        });
+    },
 
-      attandant.save(
-        (err, attandantStored)=>{
+    definedAttendant: function(req,res) {
+      let attendant = new attendantSchema();
+
+      attendant.name = req.body.name;
+      attendant.password = req.body.password;
+
+      attendant.save(
+        (err, attendantStored)=>{
         if (err) return res.status(500).send({ message: "error al guardar" });
-        if (!attandantStored) return res.status(404).send({ message: "no se pudo guradar el encargado" });
-        return res.status(200).send(attandantStored);
+        if (!attendantStored) return res.status(404).send({ message: "no se pudo guradar el encargado" });
+        return res.status(200).send(attendantStored);
     });
     },
 
-    uptadeAttandant: function(req,res){
+    uptadeAttendant: function(req,res){
 
-        let attandantId = req.params.id;
+        let attendantId = req.params.id;
         let update = req.body;
 
-        attandant.findByIdAndUpdate(attandantId, update, 
-            (err, attandantUpdated)=>{
+        attandant.findByIdAndUpdate(attendantId, update, 
+            (err, attendantUpdated)=>{
             if(err) return res.status(500).send({message: 'error al actualizar'});
-            if (!attandantUpdated) return res.status(404).send({message:'no existe el encargado a actualizar'});
-            return res.status(200).send(attandantUpdated);
+            if (!attendantUpdated) return res.status(404).send({message:'no existe el encargado a actualizar'});
+            return res.status(200).send(attendantUpdated);
         })
 
 

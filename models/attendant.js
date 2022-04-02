@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-let attandantSchema = mongoose.Schema({
+let attendantSchema = mongoose.Schema({
     name: String,
     password: String
 });
 
 
-const attandant = mongoose.model('attandant', attandantSchema);
+const attandant = mongoose.model('attendant', attendantSchema);
 module.exports = attandant;
