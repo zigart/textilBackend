@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 let divideSchema = mongoose.Schema({
+    work:String,
     worker: Object,
     machine:Object,
     date: String,

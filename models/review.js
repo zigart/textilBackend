@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 let reviewSchema = mongoose.Schema({
+    work:String,
     worker:Object,
     machine:Object,
     status:Boolean,
-    date: Date,
+    date: String,
     problems:String
 });
 

@@ -10,6 +10,7 @@ router.get('/trabajador/:id', controller.getWorker)
 router.get('/maquinas', controller.getMachines);
 router.get('/maquina/:id', controller.getMachine);
 router.get('/revision', controller.getLastReview);
+router.get('/division', controller.getDivide);
 router.get('/trabajo-actual', controller.getCurrentWork);
 router.get('/trabajo-actual/:id', controller.getCurrentWork);
 router.get('/trabajos-secundarios', controller.getToDo);

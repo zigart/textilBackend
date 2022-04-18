@@ -9,6 +9,7 @@ const currentWorkSchema = require('../models/current-work');
 const currentWork = require('../models/current-work');
 const toDoSchema = require('../models/todo');
 const attandant = require('../models/attendant');
+const { param } = require('../routes/routes');
 
 
 let controller = {
@@ -198,6 +199,7 @@ let controller = {
     addReview:function(req,res) {
         let review = new reviewSchema();
         let params = req.body;
+        review.work = params.work;
         review.worker = params.worker;
         review.machine = params.machine;
         review.status = params.status;
@@ -216,9 +218,18 @@ let controller = {
 
     //divide
 
+    getDivide:function(req,res){
+        divideSchema.find({}).exec((err,divide)=>{
+            if (err) return res.status(500).send({ message: "error al devolver los datos" });
+            if (!divide) return res.status(404).send({ message: "no existe el proyecto" });
+            return res.status(200).send(divide);
+        });
+    },
+
     addLastDivition:function(req,res) {
         let divide = new divideSchema();
         let params = req.body;
+        divide.work =  params.work;
         divide.worker = params.worker;
         divide.machine = params.machine;
         divide.date = params.date;
