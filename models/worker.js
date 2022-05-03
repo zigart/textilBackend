@@ -4,6 +4,7 @@ let workerSchema = mongoose.Schema({
     name: String,
     activeDivider: Boolean,
     activeReviewer: Boolean,
+    lastWork:String,
     lastDivition: String,
     lastReview: String,
     password: String

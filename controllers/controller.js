@@ -91,6 +91,7 @@ let controller = {
         worker.name = params.name;
         worker.activeDivider = params.activeDivider;
         worker.activeReviewer = params.activeReviewer;
+        worker.lastWork = params.lastWork;
         worker.lastDivition = params.lastDivition;
         worker.lastReview = params.lastReview;
         worker.password = params.password;
